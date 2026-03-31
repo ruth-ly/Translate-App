@@ -3,64 +3,193 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link
       rel="icon"
       href="resources/favicon.ico"
       type="image/x-icon"
       sizes="96x96"
     />
-
-    <title>Translate app | devChallenges.io</title>
-
-    <!--You are welcome to delete these styles or modify them in your own stylesheet -->
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        height: 100vh;
-      }
-
-      .author-info {
-        font-size: 14px;
-        text-align: center;
-        margin-top: 16px;
-        color: rgb(55, 65, 81);
-      }
-
-      .author-info a {
-        text-decoration: none;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
+    <title>Translate App</title>
   </head>
   <body>
-    <!-- 
+    <main class="app-shell">
+      <section class="translator-shell reveal is-visible" id="translator">
+        <div class="ambient-glow glow-left" aria-hidden="true"></div>
+        <div class="ambient-glow glow-right" aria-hidden="true"></div>
 
-    Detect Language
+        <div class="translator-header">
+          <img src="resources/logo.svg" alt="translated.io" />
+        </div>
 
-    English
+        <div class="cards">
+          <article class="card">
+            <div class="toolbar" data-group="source">
+              <span class="toolbar-label">Detect Language</span>
+              <button class="lang-btn active" data-lang="English" data-code="en">
+                English
+              </button>
+              <button class="lang-btn" data-lang="French" data-code="fr">
+                French
+              </button>
+              <button class="lang-btn" data-lang="Spanish" data-code="es">
+                Spanish
+              </button>
+              <button class="lang-btn" data-lang="German" data-code="de">
+                German
+              </button>
+              <button class="lang-btn" data-lang="Italian" data-code="it">
+                Italian
+              </button>
+              <button class="lang-btn" data-lang="Portuguese" data-code="pt">
+                Portuguese
+              </button>
+              <button class="lang-btn" data-lang="Hindi" data-code="hi">
+                Hindi
+              </button>
+              <button class="lang-btn" data-lang="Japanese" data-code="ja">
+                Japanese
+              </button>
+            </div>
 
-    French
+            <textarea
+              id="sourceText"
+              maxlength="500"
+              spellcheck="false"
+              placeholder="Type text here..."
+            >Hello, how are you?</textarea>
 
-    Spanish
+            <div class="meta-row">
+              <span id="charCount">19/500</span>
+            </div>
 
-    Hello, how are you? 
+            <div class="actions">
+              <div class="icon-group">
+                <button class="icon-btn" id="listenSource" aria-label="Listen">
+                  <img src="resources/sound_max_fill.svg" alt="" />
+                </button>
+                <button class="icon-btn" id="copySource" aria-label="Copy">
+                  <img src="resources/Copy.svg" alt="" />
+                </button>
+              </div>
 
-    Bonjour, comment allez-vous ?
+              <button class="translate-btn" id="translateBtn">
+                <img src="resources/Sort_alfa.svg" alt="" />
+                Translate
+              </button>
+            </div>
+          </article>
 
-    Translate
-  
-  -->
+          <article class="card">
+            <div class="toolbar" data-group="target">
+              <button class="lang-btn" data-lang="English" data-code="en">
+                English
+              </button>
+              <button class="lang-btn active" data-lang="French" data-code="fr">
+                French
+              </button>
+              <button class="lang-btn" data-lang="Spanish" data-code="es">
+                Spanish
+              </button>
+              <button class="lang-btn" data-lang="German" data-code="de">
+                German
+              </button>
+              <button class="lang-btn" data-lang="Italian" data-code="it">
+                Italian
+              </button>
+              <button class="lang-btn" data-lang="Portuguese" data-code="pt">
+                Portuguese
+              </button>
+              <button class="lang-btn" data-lang="Hindi" data-code="hi">
+                Hindi
+              </button>
+              <button class="lang-btn" data-lang="Japanese" data-code="ja">
+                Japanese
+              </button>
+            </div>
 
-    <div class="author-info">
-      Coded by <a href="#">Your Name Here</a> | Challenge by
-      <a href="https://www.devchallenges.io?ref=challenge" target="_blank"
-        >devChallenges.io</a
-      >.
-    </div>
+            <div class="output-wrap">
+              <div class="loading-state" id="loadingState" aria-hidden="true">
+                <div class="loader-orbit">
+                  <span class="loader-core"></span>
+                </div>
+                <p>Translating through the stars...</p>
+              </div>
+
+              <div class="output" id="translatedText">Bonjour, comment allez-vous ?</div>
+            </div>
+
+            <div class="meta-row target-meta">
+              <span>&nbsp;</span>
+            </div>
+
+            <div class="actions">
+              <div class="icon-group">
+                <button class="icon-btn" id="listenTarget" aria-label="Listen">
+                  <img src="resources/sound_max_fill.svg" alt="" />
+                </button>
+                <button class="icon-btn" id="copyTarget" aria-label="Copy">
+                  <img src="resources/Copy.svg" alt="" />
+                </button>
+              </div>
+
+              <button class="swap-btn" id="swapBtn" aria-label="Swap languages">
+                <img src="resources/Sort_alfa.svg" alt="" />
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="site-footer reveal is-visible" id="footerPeek">
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Company</h3>
+            <a href="#">About</a>
+            <a href="#">Contact us</a>
+          </div>
+
+          <div class="footer-column">
+            <h3>Terms & Policies</h3>
+            <a href="#">Terms of Service</a>
+            <a href="#">Enterprise Terms</a>
+            <a href="#">Medical Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Medical Privacy Policy</a>
+            <a href="#">Law Enforcement</a>
+            <a href="#">Cookie Policy</a>
+            <a href="#">Cookie Settings</a>
+          </div>
+
+          <div class="footer-column">
+            <h3>Support</h3>
+            <a href="#">FAQs</a>
+            <a href="#">Supported Languages</a>
+            <a href="#">Contact our Support</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="footer-copy">
+            All rights reserved. All trademarks, products and service names are the
+            property of their respective owners.
+          </p>
+
+          <div class="footer-meta">
+            <span>&copy; Translate App Frontend</span>
+            <div class="footer-socials" aria-label="Social links">
+              <a href="#" aria-label="Facebook">f</a>
+              <a href="#" aria-label="Instagram">i</a>
+              <a href="#" aria-label="Twitter">t</a>
+              <a href="#" aria-label="YouTube">y</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <p class="status" id="statusMessage">Ready to translate.</p>
+    </main>
+
+    <script src="script.js"></script>
   </body>
 </html>
